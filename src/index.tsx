@@ -6,7 +6,7 @@ import { createGlobalStyle, ThemeProvider } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   html{
-    font-size: ${window.innerWidth / 1080}px;
+    font-size: ${window.innerWidth / 2160}px;
   }
   body{
 	margin: 0px;
