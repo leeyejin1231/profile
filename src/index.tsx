@@ -2,6 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
+  html{
+    font-size: ${window.innerWidth / 1080}px;
+  }
+  body{
+	margin: 0px;
+  }
+`;
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
@@ -9,6 +19,7 @@ const root = ReactDOM.createRoot(
 root.render(
 	<React.StrictMode>
 		<App />
+		<GlobalStyle />
 	</React.StrictMode>
 );
 

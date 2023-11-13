@@ -8,7 +8,10 @@ function App() {
 		<div className="App">
 			<BrowserRouter>
 				<Routes>
-					<Route path="/" element={<MainPage />}></Route>
+					<Route
+						path="/profile.github.io"
+						element={<MainPage />}
+					></Route>
 				</Routes>
 			</BrowserRouter>
 		</div>
