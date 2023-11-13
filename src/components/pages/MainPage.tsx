@@ -46,7 +46,7 @@ const MainPage = () => {
 				<ContentText>CROIS AI Research Intern</ContentText>
 				<Padding src={"70rem"} />
 				<ContentText>ssgyejin@gmail.com</ContentText>
-				<Padding src={"100rem"} />
+				<Padding src={"150rem"} />
 			</GreyWrapper>
 			<BlackWrapper>
 				<SubTitleWrapper>
@@ -54,7 +54,7 @@ const MainPage = () => {
 				</SubTitleWrapper>
 				<Padding src={"100rem"} />
 				<BoxTitleText>엄청난 수상경력.</BoxTitleText>
-				<Padding src={"150rem"} />
+				<Padding src={"200rem"} />
 				<ColumnWrapper>
 					<AwardsWrapper>
 						<AwradBox>
@@ -76,7 +76,7 @@ const MainPage = () => {
 								<AwardCommentText>개발.</AwardCommentText>
 							</RowTextWrapper>
 						</AwradBox>
-						<Padding src={"130rem"} />
+						<Padding src={"170rem"} />
 						<AwradBox>
 							<AwardSubText>2023.01</AwardSubText>
 							<AwardTitleText>
@@ -93,7 +93,7 @@ const MainPage = () => {
 								</AwardCommentWhiteText>
 							</RowTextWrapper>
 						</AwradBox>
-						<Padding src={"130rem"} />
+						<Padding src={"150rem"} />
 						<AwradBox>
 							<AwardSubText>2022.09</AwardSubText>
 							<AwardTitleText>
@@ -137,7 +137,7 @@ const MainPage = () => {
 								<AwardCommentText>개발.</AwardCommentText>
 							</RowTextWrapper>
 						</AwradBox>
-						<Padding src={"130rem"} />
+						<Padding src={"150rem"} />
 						<AwradBox>
 							<AwardSubText>2023.01</AwardSubText>
 							<AwardTitleText>
@@ -176,7 +176,7 @@ const MainPage = () => {
 						</AwradBox>
 					</AwardsWrapper>
 				</ColumnWrapper>
-				<Padding src={"100rem"} />
+				<Padding src={"150rem"} />
 			</BlackWrapper>
 			<GreyWrapper>
 				<SubTitleWrapper>
@@ -232,7 +232,76 @@ const MainPage = () => {
 						# React # OpenAI API # Summary model
 					</ProjectTagText>
 				</ProjectBox>
-				<Padding src={"100rem"} />
+				<Padding src={"150rem"} />
+			</GreyWrapper>
+			<BlackWrapper>
+				<Padding src={"150rem"} />
+				<BoxTitleText>귀여움</BoxTitleText>
+				<BoxTitleText>또한, 놓칠 수 없다.</BoxTitleText>
+				<Padding src={"200rem"} />
+				<ProjectBox>
+					<img
+						src={require("../../assets/images/hamster.gif")}
+						width={"400rem"}
+					/>
+					<Padding src={"110rem"} />
+					<AwardTitleText>
+						직접 만든 Runcat self-made runner
+					</AwardTitleText>
+					<Padding src={"20rem"} />
+					<ProjectTagText>
+						# 노트북 # 쓸때마다 # 귀여움
+					</ProjectTagText>
+				</ProjectBox>
+				<Padding src={"250rem"} />
+				<BoxTitleText>The욱 the</BoxTitleText>
+				<BoxTitleText>끝없는 성장을 향해.</BoxTitleText>
+				<Padding src={"200rem"} />
+				<RowTextWrapper2>
+					<img
+						src={require("../../assets/images/do.png")}
+						width={"100rem"}
+					/>
+					<TheText>새로운 세상을 향해 나아가는 도전</TheText>
+				</RowTextWrapper2>
+				<Padding src={"90rem"} />
+				<RowTextWrapper2>
+					<img
+						src={require("../../assets/images/yeol.png")}
+						width={"100rem"}
+					/>
+					<TheText>그것을 가능하게 해주는 열정</TheText>
+				</RowTextWrapper2>
+				<Padding src={"90rem"} />
+				<RowTextWrapper2>
+					<img
+						src={require("../../assets/images/ch.png")}
+						width={"100rem"}
+					/>
+					<TheText>앞으로도 계속 누리게 될 청춘</TheText>
+				</RowTextWrapper2>
+				<Padding src={"90rem"} />
+				<RowTextWrapper2>
+					<img
+						src={require("../../assets/images/yeol.png")}
+						width={"100rem"}
+					/>
+					<TheText>그리고 빠질 수 없는 낭만</TheText>
+				</RowTextWrapper2>
+				<Padding src={"150rem"} />
+			</BlackWrapper>
+			<GreyWrapper>
+				<Padding src={"300rem"} />
+				<RowTextWrapper>
+					<SubTitleText>지금까지 &nbsp;</SubTitleText>
+					<SubTitleWhiteText>이예진</SubTitleWhiteText>
+					<SubTitleText>이었습니다.</SubTitleText>
+				</RowTextWrapper>
+				<Padding src={"300rem"} />
+				<Footerline />
+				<FooterText>2023.11</FooterText>
+				<FooterText>2019315580 이예진</FooterText>
+				<Padding src={"20rem"} />
 			</GreyWrapper>
 		</Wrapper>
 	);
@@ -277,13 +346,19 @@ const TitleText3 = styled.span`
 
 const SubTitleText = styled.span`
 	font-family: "Pretendard-Bold";
-	color: #c7c7c7;
+	color: #8e8e8e;
+	font-size: 60rem;
+`;
+
+const SubTitleWhiteText = styled.span`
+	font-family: "Pretendard-Bold";
+	color: white;
 	font-size: 60rem;
 `;
 
 const ContentText = styled.span`
 	font-family: "Pretendard-Bold";
-	color: #c7c7c7;
+	color: #8e8e8e;
 	font-size: 30rem;
 `;
 
@@ -295,7 +370,7 @@ const BoxTitleText = styled.span`
 
 const AwardSubText = styled.span`
 	font-family: "Pretendard-Bold";
-	color: #c7c7c7;
+	color: #8e8e8e;
 	font-size: 30rem;
 	margin-bottom: 13rem;
 `;
@@ -309,7 +384,7 @@ const AwardTitleText = styled.span`
 
 const AwardCommentText = styled.span`
 	font-family: "Pretendard-Bold";
-	color: #c7c7c7;
+	color: #8e8e8e;
 	font-size: 20rem;
 `;
 
@@ -321,8 +396,20 @@ const AwardCommentWhiteText = styled.span`
 
 const ProjectTagText = styled.span`
 	font-family: "Pretendard-Bold";
-	color: #c7c7c7;
+	color: #8e8e8e;
 	font-size: 30rem;
+`;
+
+const TheText = styled.span`
+	font-family: "Pretendard-Medium";
+	color: #8e8e8e;
+	font-size: 35rem;
+`;
+
+const FooterText = styled.span`
+	font-size: "Pretendard-Regular";
+	color: #8e8e8e;
+	font-size: 20rem;
 `;
 
 const TitleWrapper = styled.div`
@@ -357,7 +444,7 @@ const SubTitleWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: start;
-	margin-bottom: 80rem;
+	margin-bottom: 100rem;
 	margin-top: 250rem;
 `;
 
@@ -408,10 +495,26 @@ const AwradBox = styled.div`
 const RowTextWrapper = styled.div`
 	display: flex;
 	flex-direction: row;
+	align-items: center;
+`;
+
+const RowTextWrapper2 = styled.div`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	width: 40%;
 `;
 
 const ProjectBox = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+`;
+
+const Footerline = styled.div`
+	background-color: #8e8e8e;
+	width: 70%;
+	height: 1rem;
+	margin-bottom: 20rem;
 `;
