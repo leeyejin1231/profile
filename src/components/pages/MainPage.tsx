@@ -5,6 +5,7 @@ import "../../assets/fonts/Font.css";
 import { assert } from "console";
 import Fade from "react-reveal/Fade";
 import Zoom from "react-reveal/Zoom";
+import { Link } from "react-router-dom";
 
 const MainPage = () => {
 	return (
@@ -23,20 +24,26 @@ const MainPage = () => {
 					<SubTitleText>일단 소개부터.</SubTitleText>
 				</SubTitleWrapper>
 				<ImageWrapper>
-					<img
-						src={require("../../assets/images/school.png")}
-						width={"573rem"}
-						style={{ marginRight: "30rem" }}
-					></img>
-					<img
-						src={require("../../assets/images/git.png")}
-						width={"573rem"}
-						style={{ marginRight: "30rem" }}
-					></img>
-					<img
-						src={require("../../assets/images/blog.png")}
-						width={"573rem"}
-					></img>
+					<Link to="https://skku.edu/skku/index.do">
+						<img
+							src={require("../../assets/images/school.png")}
+							width={"573rem"}
+							style={{ marginRight: "30rem" }}
+						></img>
+					</Link>
+					<Link to="https://github.com/leeyejin1231">
+						<img
+							src={require("../../assets/images/git.png")}
+							width={"573rem"}
+							style={{ marginRight: "30rem" }}
+						></img>
+					</Link>
+					<Link to="https://velog.io/@leeyejin1231">
+						<img
+							src={require("../../assets/images/blog.png")}
+							width={"573rem"}
+						></img>
+					</Link>
 				</ImageWrapper>
 				<Fade>
 					<Padding src={"100rem"} />
@@ -55,10 +62,48 @@ const MainPage = () => {
 					<SubTitleText>보다 자세히 들여다보기.</SubTitleText>
 				</SubTitleWrapper>
 				<Padding src={"100rem"} />
-				<Fade>
-					<BoxTitleText>엄청난 수상경력.</BoxTitleText>
-				</Fade>
-				<Padding src={"200rem"} />
+				<SubTitleWrapperX>
+					<Fade>
+						<BoxTitleText>Skills.</BoxTitleText>
+						<BoxTitleText>다채롭다.</BoxTitleText>
+					</Fade>
+				</SubTitleWrapperX>
+				<ColumnWrapper>
+					<AwardsWrapper>
+						<Fade>
+							<img
+								src={require("../../assets/images/ml.png")}
+								width={"350rem"}
+							/>
+							<Padding src={"50rem"} />
+							<img
+								src={require("../../assets/images/db.png")}
+								width={"350rem"}
+							/>
+						</Fade>
+					</AwardsWrapper>
+					<AwardsWrapper>
+						<Fade>
+							<img
+								src={require("../../assets/images/wdb.png")}
+								width={"350rem"}
+							/>
+							<Padding src={"50rem"} />
+							<img
+								src={require("../../assets/images/app.png")}
+								width={"350rem"}
+							/>
+						</Fade>
+					</AwardsWrapper>
+				</ColumnWrapper>
+				<Padding src={"300rem"} />
+				<SubTitleWrapperX>
+					<Fade>
+						<BoxTitleText>Awards.</BoxTitleText>
+						<BoxTitleText>엄청나다.</BoxTitleText>
+					</Fade>
+				</SubTitleWrapperX>
+				<Padding src={"100rem"} />
 				<ColumnWrapper>
 					<AwardsWrapper>
 						<Fade>
@@ -188,7 +233,7 @@ const MainPage = () => {
 						</Fade>
 					</AwardsWrapper>
 				</ColumnWrapper>
-				<Padding src={"150rem"} />
+				<Padding src={"300rem"} />
 			</BlackWrapper>
 			<GreyWrapper>
 				<SubTitleWrapper>
@@ -310,11 +355,13 @@ const MainPage = () => {
 				</RowTextWrapper2>
 				<Padding src={"90rem"} />
 				<RowTextWrapper2>
-					<img
-						src={require("../../assets/images/nang.png")}
-						width={"100rem"}
-					/>
-					<TheText>그리고 빠질 수 없는 낭만</TheText>
+					<Fade>
+						<img
+							src={require("../../assets/images/nang.png")}
+							width={"100rem"}
+						/>
+						<TheText>그리고 빠질 수 없는 낭만</TheText>
+					</Fade>
 				</RowTextWrapper2>
 				<Padding src={"150rem"} />
 			</BlackWrapper>
