@@ -1,1 +1,1 @@
-https://leeyejin1231.github.io/profile/
+https://leeyejin1231.github.io/profile.github.io/
