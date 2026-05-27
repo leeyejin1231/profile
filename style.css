@@ -138,6 +138,58 @@ a { color: inherit; text-decoration: none; }
 .hero-desc strong { color: var(--text); }
 .hero-desc em     { color: var(--accent2); font-style: normal; }
 
+/* Console hint */
+.console-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  margin-top: 2rem;
+  padding: .55rem 1.1rem;
+  background: rgba(124,106,247,.06);
+  border: 1px solid rgba(124,106,247,.2);
+  border-radius: 8px;
+  font-family: var(--mono);
+  font-size: .78rem;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all .25s;
+  animation: ch-pulse 3s ease-in-out infinite;
+}
+.console-hint:hover {
+  background: rgba(124,106,247,.12);
+  border-color: rgba(124,106,247,.45);
+  color: var(--text);
+  transform: translateY(-1px);
+  animation: none;
+}
+.console-hint.ch-clicked {
+  border-color: var(--accent2);
+  color: var(--accent2);
+  animation: none;
+}
+@keyframes ch-pulse {
+  0%, 100% { opacity: .55; }
+  50%       { opacity: 1; }
+}
+
+.ch-prompt { color: var(--accent); font-weight: 700; }
+.ch-fn     { color: var(--accent2); }
+.ch-str    { color: var(--gold); }
+.ch-key {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  padding: .1rem .45rem;
+  font-size: .7rem;
+  color: var(--muted);
+  margin-left: .2rem;
+}
+.console-hint:hover .ch-key {
+  border-color: rgba(124,106,247,.4);
+  color: var(--accent);
+}
+
 /* Buttons */
 .hero-links {
   display: flex;
@@ -577,5 +629,121 @@ a { color: inherit; text-decoration: none; }
   .pub-card { flex-direction: column; gap: .75rem; }
   .tl-header { flex-direction: column; }
   .hero { padding-top: 6rem; }
-  .captcha-box { flex-wrap: wrap; justify-content: center; }
+}
+
+/* ─── Easter Eggs ───────────────────────────────────── */
+
+/* Egg 1 — Jailbreak */
+.easter-jailbreak {
+  position: fixed; inset: 0; z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,.82); backdrop-filter: blur(8px);
+  animation: ee-in .3s ease;
+}
+.ejb-box {
+  background: #160808; border: 2px solid rgba(255,80,80,.5);
+  border-radius: 16px; padding: 2.5rem 3rem;
+  text-align: center; max-width: 380px;
+  box-shadow: 0 0 60px rgba(255,40,40,.2);
+  animation: ee-up .3s ease;
+}
+.ejb-icon  { font-size: 3rem; margin-bottom: 1rem; }
+.ejb-badge {
+  display: inline-block; font-family: var(--mono);
+  font-size: .72rem; font-weight: 700; letter-spacing: .1em;
+  color: #ff6b6b; background: rgba(255,80,80,.12);
+  border: 1px solid rgba(255,80,80,.3);
+  border-radius: 6px; padding: .3rem .8rem; margin-bottom: 1rem;
+}
+.ejb-msg   { font-size: .95rem; color: var(--text); line-height: 1.75; margin-bottom: 1rem; }
+.ejb-egg   { font-family: var(--mono); font-size: .8rem; color: var(--accent2); margin-bottom: .4rem; }
+.ejb-timer { font-family: var(--mono); font-size: .7rem; color: var(--muted); }
+
+/* Egg 2 — Terminal */
+.easter-terminal {
+  position: fixed; bottom: 2rem; right: 2rem;
+  width: min(560px, 92vw); height: 360px;
+  background: #07090d;
+  border: 1px solid rgba(124,106,247,.45);
+  border-radius: 12px;
+  box-shadow: 0 24px 64px rgba(0,0,0,.8), 0 0 40px rgba(124,106,247,.12);
+  z-index: 9000; display: flex; flex-direction: column;
+  animation: ee-up .25s ease; overflow: hidden;
+}
+.et-hdr {
+  display: flex; align-items: center; gap: .75rem;
+  padding: .55rem 1rem;
+  background: rgba(255,255,255,.03);
+  border-bottom: 1px solid var(--border); flex-shrink: 0;
+}
+.et-dots { display: flex; gap: .42rem; }
+.et-dots span { width: 12px; height: 12px; border-radius: 50%; cursor: pointer; }
+.ed-r { background: #ff5f57; } .ed-r:hover { filter: brightness(.75); }
+.ed-y { background: #febc2e; }
+.ed-g { background: #28c840; }
+.et-title { font-family: var(--mono); font-size: .75rem; color: var(--muted); flex: 1; text-align: center; }
+.et-body  { flex: 1; overflow-y: auto; padding: .75rem 1rem; font-family: var(--mono); font-size: .78rem; line-height: 1.7; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+.et-info  { color: var(--accent2); margin-bottom: .2rem; }
+.et-line  { color: var(--text); margin-top: .5rem; }
+.et-ps    { color: var(--accent); font-weight: 600; margin-right: .3rem; }
+.et-out   { color: #b0b8cc; padding-left: .5rem; border-left: 2px solid var(--border); margin: .2rem 0 .5rem; }
+.et-row   { display: flex; align-items: center; border-top: 1px solid var(--border); padding: .5rem 1rem; background: rgba(124,106,247,.04); flex-shrink: 0; }
+.et-inp   { flex: 1; background: transparent; border: none; outline: none; color: var(--text); font-family: var(--mono); font-size: .78rem; caret-color: var(--accent2); }
+.tc-k     { color: var(--accent2); font-style: normal; }
+.tc-dir   { color: var(--accent); }
+.tc-c     { color: var(--muted); font-style: italic; }
+kbd       { background: var(--bg3); border: 1px solid var(--border); border-radius: 4px; padding: .1rem .35rem; font-size: .7rem; }
+
+/* Egg 3 — Konami */
+.easter-konami {
+  position: fixed; inset: 0; z-index: 9998;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none; animation: ee-in .2s ease;
+}
+.easter-konami.ek-out { animation: ee-out .5s ease forwards; }
+.ek-inner { text-align: center; animation: ee-pop .4s cubic-bezier(.175,.885,.32,1.275); }
+.ek-seq   { font-family: var(--mono); font-size: 1.4rem; font-weight: 700; color: var(--accent); letter-spacing: .15em; margin-bottom: .75rem; text-shadow: 0 0 30px var(--accent); }
+.ek-prize {
+  font-size: 2.8rem; font-weight: 900; font-family: var(--mono);
+  background: linear-gradient(135deg, var(--gold), var(--accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: .75rem;
+}
+.ek-egg { font-family: var(--mono); font-size: .9rem; color: var(--accent2); margin-bottom: .5rem; }
+.ek-msg { color: var(--text); font-size: 1rem; }
+
+/* Confetti */
+.conf-piece { position: fixed; top: -12px; z-index: 9997; animation: conf-fall linear forwards; }
+@keyframes conf-fall {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+}
+
+/* Egg 5 — Toast */
+.easter-toast {
+  position: fixed; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+  z-index: 9999; background: var(--bg3);
+  border: 1px solid rgba(124,106,247,.45); border-radius: 12px;
+  padding: .85rem 1.6rem; font-family: var(--mono); font-size: .82rem;
+  color: var(--accent2); text-align: center; box-shadow: var(--shadow);
+  animation: ee-up .25s ease; max-width: min(400px, 90vw); pointer-events: none;
+}
+.toast-out { animation: ee-out .5s ease forwards; }
+
+/* Footer hint */
+.footer-eggs {
+  font-family: var(--mono); font-size: .72rem;
+  color: rgba(124,106,247,.4); margin-top: .5rem;
+  transition: color .3s; cursor: default;
+}
+.footer-eggs:hover { color: var(--accent); }
+
+/* Shared animations */
+@keyframes ee-in  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ee-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes ee-up  { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes ee-pop {
+  0%   { transform: scale(0) rotate(-10deg); opacity: 0; }
+  65%  { transform: scale(1.12) rotate(2deg); opacity: 1; }
+  100% { transform: scale(1)    rotate(0deg); }
 }
