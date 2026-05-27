@@ -964,10 +964,15 @@
 			}
 
 			// ── Bonus: Minesweeper 💣 ────────────────────────
+			var MS_DIFFS = {
+				beginner:     { w:9,  h:9,  mines:10, cell:28 },
+				intermediate: { w:16, h:16, mines:40, cell:24 },
+				expert:       { w:30, h:16, mines:99, cell:20 }
+			};
 			var MS = {
-				SIZE: 9, MINES: 10,
+				W:9, H:9, MINES:10, CELL:28, DIFF:'beginner',
 				board:[], mines:[], nums:[],
-				started:false, over:false, won:false,
+				started:false, over:false,
 				timer:0, remaining:10, timerIv:null
 			};
 
@@ -977,53 +982,73 @@
 				el.id = 'ms-overlay'; el.className = 'ms-overlay';
 				el.innerHTML =
 					'<div class="ms-win">' +
-					'<div class="ms-tbar">' +
-					'<span class="ms-ttitle">💣 minesweeper.sh</span>' +
-					'<button class="ms-tclose" id="ms-tclose">✕</button>' +
+					'<div class="ms-tbar"><span class="ms-ttitle">💣 minesweeper.sh</span>' +
+					'<button class="ms-tclose" id="ms-tclose">✕</button></div>' +
+					'<div class="ms-diffs">' +
+					'<button class="ms-diff ms-diff-on" data-d="beginner">Beginner<br><span>9×9 · 10</span></button>' +
+					'<button class="ms-diff" data-d="intermediate">Intermediate<br><span>16×16 · 40</span></button>' +
+					'<button class="ms-diff" data-d="expert">Expert<br><span>30×16 · 99</span></button>' +
 					'</div>' +
-					'<div class="ms-panel">' +
-					'<div class="ms-lcd" id="ms-mines">010</div>' +
+					'<div class="ms-panel"><div class="ms-lcd" id="ms-mines">010</div>' +
 					'<button class="ms-face" id="ms-face">🙂</button>' +
-					'<div class="ms-lcd" id="ms-timer">000</div>' +
-					'</div>' +
+					'<div class="ms-lcd" id="ms-timer">000</div></div>' +
 					'<div class="ms-grid" id="ms-grid"></div>' +
-					'<div class="ms-info">Left click: reveal &nbsp;·&nbsp; Right click: flag &nbsp;·&nbsp; 🥚 Bonus egg — found via terminal!</div>' +
+					'<div class="ms-info">Left: reveal &nbsp;·&nbsp; Right: flag &nbsp;·&nbsp; Left+Right on number: chord &nbsp;·&nbsp; 🥚 bonus egg!</div>' +
 					'</div>';
 				document.body.appendChild(el);
-				document.getElementById('ms-tclose').onclick = function() { clearInterval(MS.timerIv); el.remove(); };
+				document.getElementById('ms-tclose').onclick = function() {
+					clearInterval(MS.timerIv); el.remove();
+					document.removeEventListener('mouseup', msGlobalUp);
+				};
 				document.getElementById('ms-face').onclick = function() { msReset(); };
-				document.getElementById('ms-grid').addEventListener('contextmenu', function(e){ e.preventDefault(); });
+				el.querySelectorAll('.ms-diff').forEach(function(btn) {
+					btn.addEventListener('click', function() {
+						el.querySelectorAll('.ms-diff').forEach(function(b){ b.classList.remove('ms-diff-on'); });
+						btn.classList.add('ms-diff-on');
+						MS.DIFF = btn.getAttribute('data-d');
+						msReset();
+					});
+				});
+				document.addEventListener('mouseup', msGlobalUp);
 				msReset();
+			}
+
+			function msGlobalUp(e) {
+				// mouseup tracking for chord — no rerender needed here
+				// (chord fires on mousedown; click events fire after mouseup)
 			}
 
 			function msReset() {
 				clearInterval(MS.timerIv);
+				var d = MS_DIFFS[MS.DIFF];
+				MS.W=d.w; MS.H=d.h; MS.MINES=d.mines; MS.CELL=d.cell;
 				MS.board=[]; MS.mines=[]; MS.nums=[];
-				MS.started=false; MS.over=false; MS.won=false;
+				MS.started=false; MS.over=false;
 				MS.timer=0; MS.remaining=MS.MINES;
-				for(var i=0;i<MS.SIZE*MS.SIZE;i++){MS.board.push(0);MS.mines.push(false);MS.nums.push(0);}
-				msLCD('ms-mines', MS.remaining); msLCD('ms-timer', 0);
+				for(var i=0;i<MS.W*MS.H;i++){MS.board.push(0);MS.mines.push(false);MS.nums.push(0);}
+				msLCD('ms-mines',MS.remaining); msLCD('ms-timer',0);
 				var f=document.getElementById('ms-face'); if(f) f.textContent='🙂';
 				msRender();
 			}
 
 			function msPlaceMines(safeIdx) {
-				var placed=0;
-				while(placed<MS.MINES){
-					var idx=Math.floor(Math.random()*MS.SIZE*MS.SIZE);
+				var placed=0, tries=0;
+				while(placed<MS.MINES && tries<99999){
+					tries++;
+					var idx=Math.floor(Math.random()*MS.W*MS.H);
 					if(idx===safeIdx||MS.mines[idx]) continue;
-					var sx=safeIdx%MS.SIZE, sy=Math.floor(safeIdx/MS.SIZE);
-					var ix=idx%MS.SIZE,     iy=Math.floor(idx/MS.SIZE);
+					var sx=safeIdx%MS.W, sy=Math.floor(safeIdx/MS.W);
+					var ix=idx%MS.W,     iy=Math.floor(idx/MS.W);
 					if(Math.abs(ix-sx)<=1&&Math.abs(iy-sy)<=1) continue;
 					MS.mines[idx]=true; placed++;
 				}
-				for(var y=0;y<MS.SIZE;y++) for(var x=0;x<MS.SIZE;x++){
-					var i=y*MS.SIZE+x;
+				for(var y=0;y<MS.H;y++) for(var x=0;x<MS.W;x++){
+					var i=y*MS.W+x;
 					if(MS.mines[i]){MS.nums[i]=-1;continue;}
 					var c=0;
 					for(var dy=-1;dy<=1;dy++) for(var dx=-1;dx<=1;dx++){
 						var nx=x+dx,ny=y+dy;
-						if(nx>=0&&nx<MS.SIZE&&ny>=0&&ny<MS.SIZE&&MS.mines[ny*MS.SIZE+nx]) c++;
+						if(nx>=0&&nx<MS.W&&ny>=0&&ny<MS.H&&MS.mines[ny*MS.W+nx]) c++;
 					}
 					MS.nums[i]=c;
 				}
@@ -1040,8 +1065,11 @@
 				}
 				if(MS.mines[idx]){
 					MS.over=true; clearInterval(MS.timerIv);
-					MS.board[idx]=3;
-					for(var i=0;i<MS.board.length;i++) if(MS.mines[i]&&MS.board[i]!==2) MS.board[i]=1;
+					MS.board[idx]=3; // exploded
+					for(var i=0;i<MS.board.length;i++){
+						if(MS.mines[i]&&MS.board[i]===0) MS.board[i]=1;  // show unflagged mines
+						if(!MS.mines[i]&&MS.board[i]===2) MS.board[i]=4; // wrong flag
+					}
 					var f=document.getElementById('ms-face'); if(f) f.textContent='😵';
 					msRender(); return;
 				}
@@ -1051,14 +1079,37 @@
 			}
 
 			function msFlood(idx) {
-				if(idx<0||idx>=MS.SIZE*MS.SIZE||MS.board[idx]!==0) return;
+				if(idx<0||idx>=MS.W*MS.H||MS.board[idx]!==0) return;
 				MS.board[idx]=1;
 				if(MS.nums[idx]!==0) return;
-				var x=idx%MS.SIZE, y=Math.floor(idx/MS.SIZE);
+				var x=idx%MS.W, y=Math.floor(idx/MS.W);
 				for(var dy=-1;dy<=1;dy++) for(var dx=-1;dx<=1;dx++){
+					if(dx===0&&dy===0) continue;
 					var nx=x+dx, ny=y+dy;
-					if(nx>=0&&nx<MS.SIZE&&ny>=0&&ny<MS.SIZE) msFlood(ny*MS.SIZE+nx);
+					if(nx>=0&&nx<MS.W&&ny>=0&&ny<MS.H) msFlood(ny*MS.W+nx);
 				}
+			}
+
+			// Chord: both buttons on a numbered open cell → reveal all non-flagged neighbors
+			// (only safe if flagged count matches the number)
+			function msChord(idx) {
+				if(MS.over||MS.board[idx]!==1||MS.nums[idx]<=0) return;
+				var x=idx%MS.W, y=Math.floor(idx/MS.W), adjFlags=0;
+				for(var dy=-1;dy<=1;dy++) for(var dx=-1;dx<=1;dx++){
+					if(dx===0&&dy===0) continue;
+					var nx=x+dx,ny=y+dy;
+					if(nx>=0&&nx<MS.W&&ny>=0&&ny<MS.H&&MS.board[ny*MS.W+nx]===2) adjFlags++;
+				}
+				if(adjFlags!==MS.nums[idx]) return; // not enough flags — do nothing
+				for(var dy2=-1;dy2<=1;dy2++) for(var dx2=-1;dx2<=1;dx2++){
+					if(dx2===0&&dy2===0) continue;
+					var nx2=x+dx2,ny2=y+dy2;
+					if(nx2>=0&&nx2<MS.W&&ny2>=0&&ny2<MS.H){
+						var ni=ny2*MS.W+nx2;
+						if(MS.board[ni]===0){ msReveal(ni); if(MS.over) return; }
+					}
+				}
+				msRender();
 			}
 
 			function msFlag(idx) {
@@ -1069,42 +1120,62 @@
 			}
 
 			function msCheckWin() {
-				var hidden=0;
-				for(var i=0;i<MS.board.length;i++) if(MS.board[i]!==1) hidden++;
-				if(hidden===MS.MINES){
-					MS.won=true; MS.over=true; clearInterval(MS.timerIv);
+				var unrevealed=0;
+				for(var i=0;i<MS.board.length;i++) if(MS.board[i]!==1) unrevealed++;
+				if(unrevealed===MS.MINES){
+					MS.over=true; clearInterval(MS.timerIv);
 					for(var j=0;j<MS.board.length;j++) if(MS.mines[j]) MS.board[j]=2;
 					msLCD('ms-mines',0);
 					var f=document.getElementById('ms-face'); if(f) f.textContent='😎';
-					setTimeout(function(){ toast('🎉 Minesweeper cleared! No mines were... wait, that\'s the whole point 💣'); },400);
+					setTimeout(function(){ toast('🎉 Minesweeper cleared! '+MS.DIFF+' in '+MS.timer+'s 💣'); },400);
 				}
 			}
 
 			var NUM_CLR=['','#1565c0','#2e7d32','#c62828','#4527a0','#bf360c','#00695c','#37474f','#546e7a'];
 			function msRender() {
 				var grid=document.getElementById('ms-grid'); if(!grid) return;
+				grid.style.gridTemplateColumns='repeat('+MS.W+','+MS.CELL+'px)';
 				grid.innerHTML='';
-				for(var i=0;i<MS.SIZE*MS.SIZE;i++) (function(idx){
-					var cell=document.createElement('div'); cell.className='ms-cell';
+				var csz=MS.CELL+'px';
+				for(var i=0;i<MS.W*MS.H;i++) (function(idx){
+					var cell=document.createElement('div');
+					cell.className='ms-cell';
+					cell.style.width=csz; cell.style.height=csz;
+					if(MS.CELL<=22) cell.style.fontSize='.62rem';
 					var s=MS.board[idx];
-					if(s===2){cell.classList.add('ms-hidden');cell.textContent='🚩';}
-					else if(s===3){cell.classList.add('ms-boom');cell.textContent='💥';}
-					else if(s===1){
+
+					if(s===3){ // exploded
+						cell.classList.add('ms-boom'); cell.textContent='💥';
+					} else if(s===4){ // wrong flag
+						cell.classList.add('ms-open'); cell.textContent='❌';
+					} else if(s===2){ // flag
+						cell.classList.add('ms-hidden'); cell.textContent='🚩';
+						cell.addEventListener('contextmenu',function(e){e.preventDefault();msFlag(idx);});
+					} else if(s===1){ // revealed
 						cell.classList.add('ms-open');
-						if(MS.mines[idx]){cell.textContent='💣';}
-						else if(MS.nums[idx]>0){cell.textContent=MS.nums[idx];cell.style.color=NUM_CLR[MS.nums[idx]];}
-					} else {
+						if(MS.mines[idx]){
+							cell.textContent='💣';
+						} else if(MS.nums[idx]>0){
+							cell.textContent=MS.nums[idx];
+							cell.style.color=NUM_CLR[MS.nums[idx]];
+							// ── Chord: e.buttons===3 means both left+right held ──
+							cell.addEventListener('mousedown',function(e){
+								if(e.buttons===3){ e.preventDefault(); msChord(idx); }
+							});
+						}
+					} else { // hidden
 						cell.classList.add('ms-hidden');
+						cell.addEventListener('click',function(){ msReveal(idx); });
+						cell.addEventListener('contextmenu',function(e){e.preventDefault();msFlag(idx);});
 					}
-					cell.addEventListener('click',function(){msReveal(idx);});
-					cell.addEventListener('contextmenu',function(e){e.preventDefault();msFlag(idx);});
 					grid.appendChild(cell);
 				})(i);
 			}
 
 			function msLCD(id,val){
-				var el=document.getElementById(id);
-				if(el) el.textContent=String(Math.max(-99,Math.min(999,val))).replace('-','-').padStart(3,'0');
+				var el=document.getElementById(id); if(!el) return;
+				var n=Math.max(-99,Math.min(999,Math.floor(val)));
+				el.textContent=(n<0?'-'+String(-n).padStart(2,'0'):String(n).padStart(3,'0'));
 			}
 		</script>
 	</body>
