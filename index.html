@@ -1,17 +1,342 @@
 <!DOCTYPE html>
-
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Hello</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <div class="container">
-            <div class="header">
-                <h1>Hello</h1>
-            </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yejin Lee</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <span class="nav-logo">YJ</span>
+    <ul class="nav-links">
+      <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#awards">Awards</a></li>
+      <li><a href="#patents">Patents</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <span class="dot"></span> Available for collaboration
+      </div>
+      <h1 class="hero-name">Yejin Lee</h1>
+      <p class="hero-title">NLP · LLM Safety · Hate Speech Detection</p>
+      <p class="hero-desc">
+        Researching <em>LLM safety</em> with a focus on building safer, more trustworthy language models.
+        Interested in <em>jailbreaking</em> and robustness of LLMs against adversarial inputs,
+        as well as implicit hate speech detection as a core safety challenge.
+      </p>
+
+      <div class="hero-links">
+        <a href="mailto:ssgyejin@gmail.com" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          ssgyejin@gmail.com
+        </a>
+        <a href="https://github.com/leeyejin1231" target="_blank" rel="noopener" class="btn btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+          GitHub
+        </a>
+        <a href="https://velog.io/@leeyejin1231" target="_blank" rel="noopener" class="btn btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Blog
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <main class="main">
+
+    <!-- EDUCATION -->
+    <section id="education" class="section">
+      <h2 class="section-title"><span class="tag">01</span> Education</h2>
+
+      <div class="edu-list">
+
+        <div class="edu-card current">
+          <div class="edu-left">
+            <span class="edu-period">2024 –</span>
+            <div class="edu-line"></div>
+          </div>
+          <div class="edu-body">
+            <p class="edu-school">Yonsei University</p>
+            <p class="edu-dept">Integrated M.S./Ph.D. Program in Computer Science</p>
+            <span class="edu-badge current-badge">Enrolled</span>
+          </div>
         </div>
-    </body>
+
+        <div class="edu-card">
+          <div class="edu-left">
+            <span class="edu-period">2021 – 2024</span>
+            <div class="edu-line"></div>
+          </div>
+          <div class="edu-body">
+            <p class="edu-school">Sungkyunkwan University</p>
+            <p class="edu-dept">B.S. in Computer Science and Engineering</p>
+            <span class="edu-badge grad-badge">Graduated</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section">
+      <h2 class="section-title"><span class="tag">02</span> Experience</h2>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="tl-header">
+              <span class="company">LG Electronics</span>
+              <span class="period">Jan 2024 – May 2024</span>
+            </div>
+            <p class="role">R&D Software Engineer</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="tl-header">
+              <span class="company">Crois</span>
+              <span class="period">Sep 2023 – Dec 2023</span>
+            </div>
+            <p class="role">AI Research Intern</p>
+          </div>
+        </div>
+
+        <div class="timeline-item activity">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="tl-header">
+              <span class="company">NAVER Connect Foundation</span>
+              <span class="period">Jan 2022 – Jun 2022</span>
+            </div>
+            <p class="role">3rd Boostcamp AI Tech · NLP Track</p>
+          </div>
+        </div>
+
+        <div class="timeline-item activity">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="tl-header">
+              <span class="company">Sungkyunkwan Univ &amp; Shinhan Bank</span>
+              <span class="period">May 2021 – Dec 2021</span>
+            </div>
+            <p class="role">Industry-Academic Collaboration Project</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section id="publications" class="section">
+      <h2 class="section-title"><span class="tag">03</span> Publications</h2>
+
+      <div class="pub-list">
+
+        <div class="pub-card">
+          <div class="pub-venue acl">ACL 2026</div>
+          <div class="pub-body">
+            <p class="pub-title">
+              <a href="https://arxiv.org/abs/2510.10971" target="_blank" rel="noopener">
+                RV-HATE: Reinforced Multi-Module Voting for Implicit Hate Speech Detection
+              </a>
+            </p>
+            <p class="pub-authors"><strong>Y Lee</strong>, H Ahn, YS Han</p>
+            <a href="https://github.com/leeyejin1231/RV-HATE" target="_blank" rel="noopener" class="pub-github">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-venue emnlp">EMNLP 2025</div>
+          <div class="pub-body">
+            <p class="pub-title">
+              <a href="https://aclanthology.org/2025.emnlp-main.1469/" target="_blank" rel="noopener">
+                AmpleHate: Amplify target-context relationships for implicit hate speech detection
+              </a>
+            </p>
+            <p class="pub-authors"><strong>Y Lee</strong>, J Hahn, H Ahn, YS Han</p>
+            <a href="https://github.com/leeyejin1231/AmpleHate" target="_blank" rel="noopener" class="pub-github">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-venue under">Under Review</div>
+          <div class="pub-body">
+            <p class="pub-title">
+              <a href="https://arxiv.org/abs/2605.13043" target="_blank" rel="noopener">
+                Adaptive Steering and Remasking for Safe Generation in Diffusion Language Models
+              </a>
+            </p>
+            <p class="pub-authors"><strong>Y Lee</strong>, YS Han</p>
+          </div>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-venue under">Under Review</div>
+          <div class="pub-body">
+            <p class="pub-title">
+              <a href="https://arxiv.org/abs/2510.10961" target="_blank" rel="noopener">
+                KOTOX: A Korean Toxic Dataset for Deobfuscation and Detoxification
+              </a>
+            </p>
+            <p class="pub-authors"><strong>Y Lee</strong>, SH Kim, H Jin, D Kim, Y Kim, YS Han</p>
+          </div>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-venue under">Under Review</div>
+          <div class="pub-body">
+            <p class="pub-title">
+              <a href="https://arxiv.org/abs/2601.03662" target="_blank" rel="noopener">
+                How Does the Thinking Step Influence Model Safety? An Entropy-based Safety Reminder for LRMs
+              </a>
+            </p>
+            <p class="pub-authors">SH Kim, H Jin, <strong>Y Lee</strong>, YS Han</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- AWARDS -->
+    <section id="awards" class="section">
+      <h2 class="section-title"><span class="tag">04</span> Awards</h2>
+
+      <div class="awards-grid">
+
+        <div class="award-card highlight">
+          <div class="award-icon">🏆</div>
+          <div class="award-body">
+            <p class="award-title">3rd K-AI Manufacturing Data Analysis Competition</p>
+            <p class="award-meta">2023 · KAIST, Ministry of SMEs and Startups, Smart Manufacturing Innovation Promotion Group</p>
+            <span class="award-prize grand">Grand Prize</span>
+          </div>
+        </div>
+
+        <div class="award-card highlight">
+          <div class="award-icon">🥇</div>
+          <div class="award-body">
+            <p class="award-title"><a href="https://github.com/99ulling/99ulling" target="_blank" rel="noopener">1st 9oormthon</a></p>
+            <p class="award-meta">2022 · kakao, goorm</p>
+            <span class="award-prize grand">Grand Prize</span>
+          </div>
+        </div>
+
+        <div class="award-card">
+          <div class="award-icon">⭐</div>
+          <div class="award-body">
+            <p class="award-title">Outstanding Open Source Software Student</p>
+            <p class="award-meta">2022, 2023 · College of Software, Sungkyunkwan Univ</p>
+            <span class="award-prize encourage">Encouragement Award</span>
+          </div>
+        </div>
+
+        <div class="award-card">
+          <div class="award-icon">🎖️</div>
+          <div class="award-body">
+            <p class="award-title"><a href="https://github.com/sweet-muffin/skillink" target="_blank" rel="noopener">2023 AI HACKATHON</a></p>
+            <p class="award-meta">Udemy Curation, Wanted, JoCoding</p>
+            <span class="award-prize third">3rd Place</span>
+          </div>
+        </div>
+
+        <div class="award-card">
+          <div class="award-icon">📄</div>
+          <div class="award-body">
+            <p class="award-title"><a href="https://github.com/skku-skku/Record-summary-qa-system" target="_blank" rel="noopener">2023 Spring Research Paper &amp; Project Presentation</a></p>
+            <p class="award-meta">College of Software, Sungkyunkwan Univ</p>
+            <span class="award-prize best">Best Presentation</span>
+          </div>
+        </div>
+
+        <div class="award-card">
+          <div class="award-icon">📚</div>
+          <div class="award-body">
+            <p class="award-title"><a href="https://github.com/JLake310/Bookathon_4th_Jagga" target="_blank" rel="noopener">4th Undergraduate AI x BOOKATHON</a></p>
+            <p class="award-meta">2023 · Sungkyunkwan Univ, Industry-Academic-Research Innovation Council</p>
+            <span class="award-prize encourage">Encouragement Award</span>
+          </div>
+        </div>
+
+        <div class="award-card">
+          <div class="award-icon">💡</div>
+          <div class="award-body">
+            <p class="award-title"><a href="https://github.com/99ulling/99ulling" target="_blank" rel="noopener">Jeju ICT Innovation Square Idea Competition</a></p>
+            <p class="award-meta">2022 · Jeju Industry-University Cooperation Foundation</p>
+            <span class="award-prize encourage">Encouragement Award</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PATENTS -->
+    <section id="patents" class="section">
+      <h2 class="section-title"><span class="tag">05</span> Patents</h2>
+
+      <div class="patent-list">
+
+        <div class="patent-item">
+          <span class="patent-flag us">US</span>
+          <div>
+            <p class="patent-title">Implicit Hate Speech Detection Apparatus Based on Target-Context Relation Amplification</p>
+            <p class="patent-num">19/551,450 · 출원</p>
+          </div>
+        </div>
+
+        <div class="patent-item">
+          <span class="patent-flag kr">KR</span>
+          <div>
+            <p class="patent-title">다중모듈 강화학습을 통한 암시적 혐오 표현 탐지 장치 및 방법</p>
+            <p class="patent-num">10-2025-0200617 · 출원</p>
+          </div>
+        </div>
+
+        <div class="patent-item">
+          <span class="patent-flag kr">KR</span>
+          <div>
+            <p class="patent-title">대상-문맥 관계 증폭 기반 암시적 혐오 표현 탐지 장치 및 방법</p>
+            <p class="patent-num">10-2025-0194914 · 출원</p>
+          </div>
+        </div>
+
+        <div class="patent-item">
+          <span class="patent-flag kr">KR</span>
+          <div>
+            <p class="patent-title"><a href="https://github.com/leeyejin1231/JKJproject" target="_blank" rel="noopener">The Caring Seat in a Public Transportation</a></p>
+            <p class="patent-num">10-2020-0000289 · 출원</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2025 Yejin Lee · ssgyejin@gmail.com</p>
+    <p class="footer-sub">Made with ☕ and a suspicious amount of CAPTCHA failures</p>
+  </footer>
+
+</body>
 </html>
