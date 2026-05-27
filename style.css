@@ -738,6 +738,85 @@ kbd       { background: var(--bg3); border: 1px solid var(--border); border-radi
 }
 .footer-eggs:hover { color: var(--accent); }
 
+/* Bonus: Minesweeper 💣 */
+.ms-overlay {
+  position: fixed; inset: 0; z-index: 9600;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,.55); backdrop-filter: blur(4px);
+  animation: ee-in .2s ease;
+}
+.ms-win {
+  background: #c0c0c0;
+  border: 3px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  box-shadow: 4px 4px 0 #000, inset 1px 1px 0 #dfdfdf;
+  font-family: 'Arial', sans-serif;
+  user-select: none;
+}
+.ms-tbar {
+  background: linear-gradient(90deg, #000080, #1084d0);
+  padding: .28rem .5rem .28rem .45rem;
+  display: flex; align-items: center; justify-content: space-between;
+  color: #fff; font-size: .8rem; font-weight: 700; gap: .5rem;
+}
+.ms-ttitle { display: flex; align-items: center; gap: .4rem; }
+.ms-tclose {
+  background: #c0c0c0; color: #000;
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  font-size: .75rem; font-weight: 900; font-family: Arial, sans-serif;
+  padding: 0 .4rem; line-height: 1.35; cursor: pointer; flex-shrink: 0;
+}
+.ms-tclose:active { border-color: #808080 #fff #fff #808080; }
+
+.ms-panel {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .45rem .6rem;
+  border: 2px solid; border-color: #808080 #fff #fff #808080;
+  margin: .4rem;
+}
+.ms-lcd {
+  font-family: 'Courier New', monospace; font-size: 1.5rem; font-weight: 700;
+  color: #ff0000; background: #000;
+  padding: .05rem .35rem;
+  border: 2px solid; border-color: #808080 #fff #fff #808080;
+  min-width: 3rem; text-align: right; letter-spacing: .05em;
+  line-height: 1.2;
+}
+.ms-face {
+  background: #c0c0c0; font-size: 1.25rem; line-height: 1;
+  border: 3px solid; border-color: #fff #808080 #808080 #fff;
+  padding: .2rem .35rem; cursor: pointer;
+}
+.ms-face:active { border-color: #808080 #fff #fff #808080; padding: .25rem .3rem .15rem .4rem; }
+
+.ms-grid {
+  display: grid; grid-template-columns: repeat(9, 28px);
+  gap: 0; padding: .4rem;
+  border: 3px solid; border-color: #808080 #fff #fff #808080;
+  margin: 0 .4rem .4rem;
+}
+.ms-cell {
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .75rem; font-weight: 900; cursor: pointer;
+  border: 2px solid;
+}
+.ms-hidden {
+  background: #c0c0c0;
+  border-color: #fff #808080 #808080 #fff;
+}
+.ms-hidden:hover:not(:has(~.ms-over)) { background: #d0d0d0; }
+.ms-hidden:active { background: #b0b0b0; border-color: #808080; border-width: 1px; }
+.ms-open {
+  background: #bdbdbd; border: 1px solid #808080; cursor: default;
+  font-family: 'Arial Black', sans-serif;
+}
+.ms-boom { background: #ff0000; border: 1px solid #808080; cursor: default; }
+.ms-info {
+  font-size: .62rem; color: #606060; text-align: center;
+  padding: .2rem .5rem .45rem; font-family: monospace;
+}
+
 /* Shared animations */
 @keyframes ee-in  { from { opacity: 0; } to { opacity: 1; } }
 @keyframes ee-out { from { opacity: 1; } to { opacity: 0; } }

@@ -709,11 +709,12 @@
 			var CMDS = {
 				help:
 					"Available commands:\n" +
-					'  <b class="tc-k">ls</b>              list files\n' +
-					'  <b class="tc-k">cat about.txt</b>   read bio\n' +
-					'  <b class="tc-k">./run_model.sh</b>  run safety demo\n' +
-					'  <b class="tc-k">whoami</b>          current user\n' +
-					'  <b class="tc-k">jailbreak</b>       ...really?\n' +
+					'  <b class="tc-k">ls</b>                  list files\n' +
+					'  <b class="tc-k">cat about.txt</b>       read bio\n' +
+					'  <b class="tc-k">./run_model.sh</b>      run safety demo\n' +
+					'  <b class="tc-k">./minesweeper.sh</b>    💣 ???\n' +
+					'  <b class="tc-k">whoami</b>              current user\n' +
+					'  <b class="tc-k">jailbreak</b>           ...really?\n' +
 					'  <b class="tc-k">clear</b>  /  <b class="tc-k">exit</b>',
 				ls:
 					'drwxr-xr-x  <span class="tc-dir">research/</span>\n' +
@@ -723,7 +724,8 @@
 					'  └── <span class="tc-dir">jailbreak_defense/</span>  <i class="tc-c">← my specialty</i>\n' +
 					"-rw-r--r--  RV-HATE.pdf\n" +
 					"-rw-r--r--  AmpleHate.pdf\n" +
-					'-rw-------  secrets.txt  <i class="tc-c">← 🔒 permission denied</i>',
+					'-rw-------  secrets.txt  <i class="tc-c">← 🔒 permission denied</i>\n' +
+					'-rwxr-xr-x  <span style="color:var(--gold)">minesweeper.sh</span>  <i class="tc-c">← what is this...?</i>',
 				whoami: 'yejin\n<i class="tc-c">NLP researcher · LLM safety · easter egg architect</i>',
 				"cat about.txt":
 					"Name   : Yejin Lee\n" +
@@ -741,6 +743,7 @@
 				jailbreak:
 					'<span style="color:#ff6b6b">Permission denied.</span>\n' +
 					'<i class="tc-c">The safety filter works exactly as designed 🛡️</i>',
+				"./minesweeper.sh": "__MS__",
 				clear: "__CLEAR__",
 				exit: "__EXIT__",
 			};
@@ -800,6 +803,12 @@
 					return;
 				} else if (res === "__EXIT__") {
 					document.querySelector(".easter-terminal").remove();
+					return;
+				} else if (res === "__MS__") {
+					out.innerHTML = '<span style="color:var(--accent2)">Launching minesweeper.sh... 💣</span>';
+					lines.appendChild(out);
+					termScroll();
+					setTimeout(function() { msOpen(); }, 350);
 					return;
 				} else if (res !== undefined) {
 					out.innerHTML = res.replace(/\n/g, "<br>");
@@ -952,6 +961,150 @@
 				setTimeout(function () {
 					t.remove();
 				}, 4000);
+			}
+
+			// ── Bonus: Minesweeper 💣 ────────────────────────
+			var MS = {
+				SIZE: 9, MINES: 10,
+				board:[], mines:[], nums:[],
+				started:false, over:false, won:false,
+				timer:0, remaining:10, timerIv:null
+			};
+
+			function msOpen() {
+				if (document.getElementById('ms-overlay')) return;
+				var el = document.createElement('div');
+				el.id = 'ms-overlay'; el.className = 'ms-overlay';
+				el.innerHTML =
+					'<div class="ms-win">' +
+					'<div class="ms-tbar">' +
+					'<span class="ms-ttitle">💣 minesweeper.sh</span>' +
+					'<button class="ms-tclose" id="ms-tclose">✕</button>' +
+					'</div>' +
+					'<div class="ms-panel">' +
+					'<div class="ms-lcd" id="ms-mines">010</div>' +
+					'<button class="ms-face" id="ms-face">🙂</button>' +
+					'<div class="ms-lcd" id="ms-timer">000</div>' +
+					'</div>' +
+					'<div class="ms-grid" id="ms-grid"></div>' +
+					'<div class="ms-info">Left click: reveal &nbsp;·&nbsp; Right click: flag &nbsp;·&nbsp; 🥚 Bonus egg — found via terminal!</div>' +
+					'</div>';
+				document.body.appendChild(el);
+				document.getElementById('ms-tclose').onclick = function() { clearInterval(MS.timerIv); el.remove(); };
+				document.getElementById('ms-face').onclick = function() { msReset(); };
+				document.getElementById('ms-grid').addEventListener('contextmenu', function(e){ e.preventDefault(); });
+				msReset();
+			}
+
+			function msReset() {
+				clearInterval(MS.timerIv);
+				MS.board=[]; MS.mines=[]; MS.nums=[];
+				MS.started=false; MS.over=false; MS.won=false;
+				MS.timer=0; MS.remaining=MS.MINES;
+				for(var i=0;i<MS.SIZE*MS.SIZE;i++){MS.board.push(0);MS.mines.push(false);MS.nums.push(0);}
+				msLCD('ms-mines', MS.remaining); msLCD('ms-timer', 0);
+				var f=document.getElementById('ms-face'); if(f) f.textContent='🙂';
+				msRender();
+			}
+
+			function msPlaceMines(safeIdx) {
+				var placed=0;
+				while(placed<MS.MINES){
+					var idx=Math.floor(Math.random()*MS.SIZE*MS.SIZE);
+					if(idx===safeIdx||MS.mines[idx]) continue;
+					var sx=safeIdx%MS.SIZE, sy=Math.floor(safeIdx/MS.SIZE);
+					var ix=idx%MS.SIZE,     iy=Math.floor(idx/MS.SIZE);
+					if(Math.abs(ix-sx)<=1&&Math.abs(iy-sy)<=1) continue;
+					MS.mines[idx]=true; placed++;
+				}
+				for(var y=0;y<MS.SIZE;y++) for(var x=0;x<MS.SIZE;x++){
+					var i=y*MS.SIZE+x;
+					if(MS.mines[i]){MS.nums[i]=-1;continue;}
+					var c=0;
+					for(var dy=-1;dy<=1;dy++) for(var dx=-1;dx<=1;dx++){
+						var nx=x+dx,ny=y+dy;
+						if(nx>=0&&nx<MS.SIZE&&ny>=0&&ny<MS.SIZE&&MS.mines[ny*MS.SIZE+nx]) c++;
+					}
+					MS.nums[i]=c;
+				}
+			}
+
+			function msReveal(idx) {
+				if(MS.over||MS.board[idx]!==0) return;
+				if(!MS.started){
+					MS.started=true;
+					msPlaceMines(idx);
+					MS.timerIv=setInterval(function(){
+						MS.timer++; msLCD('ms-timer',Math.min(MS.timer,999));
+					},1000);
+				}
+				if(MS.mines[idx]){
+					MS.over=true; clearInterval(MS.timerIv);
+					MS.board[idx]=3;
+					for(var i=0;i<MS.board.length;i++) if(MS.mines[i]&&MS.board[i]!==2) MS.board[i]=1;
+					var f=document.getElementById('ms-face'); if(f) f.textContent='😵';
+					msRender(); return;
+				}
+				msFlood(idx);
+				msCheckWin();
+				msRender();
+			}
+
+			function msFlood(idx) {
+				if(idx<0||idx>=MS.SIZE*MS.SIZE||MS.board[idx]!==0) return;
+				MS.board[idx]=1;
+				if(MS.nums[idx]!==0) return;
+				var x=idx%MS.SIZE, y=Math.floor(idx/MS.SIZE);
+				for(var dy=-1;dy<=1;dy++) for(var dx=-1;dx<=1;dx++){
+					var nx=x+dx, ny=y+dy;
+					if(nx>=0&&nx<MS.SIZE&&ny>=0&&ny<MS.SIZE) msFlood(ny*MS.SIZE+nx);
+				}
+			}
+
+			function msFlag(idx) {
+				if(MS.over||!MS.started||MS.board[idx]===1) return;
+				if(MS.board[idx]===0){MS.board[idx]=2;MS.remaining--;}
+				else if(MS.board[idx]===2){MS.board[idx]=0;MS.remaining++;}
+				msLCD('ms-mines',MS.remaining); msRender();
+			}
+
+			function msCheckWin() {
+				var hidden=0;
+				for(var i=0;i<MS.board.length;i++) if(MS.board[i]!==1) hidden++;
+				if(hidden===MS.MINES){
+					MS.won=true; MS.over=true; clearInterval(MS.timerIv);
+					for(var j=0;j<MS.board.length;j++) if(MS.mines[j]) MS.board[j]=2;
+					msLCD('ms-mines',0);
+					var f=document.getElementById('ms-face'); if(f) f.textContent='😎';
+					setTimeout(function(){ toast('🎉 Minesweeper cleared! No mines were... wait, that\'s the whole point 💣'); },400);
+				}
+			}
+
+			var NUM_CLR=['','#1565c0','#2e7d32','#c62828','#4527a0','#bf360c','#00695c','#37474f','#546e7a'];
+			function msRender() {
+				var grid=document.getElementById('ms-grid'); if(!grid) return;
+				grid.innerHTML='';
+				for(var i=0;i<MS.SIZE*MS.SIZE;i++) (function(idx){
+					var cell=document.createElement('div'); cell.className='ms-cell';
+					var s=MS.board[idx];
+					if(s===2){cell.classList.add('ms-hidden');cell.textContent='🚩';}
+					else if(s===3){cell.classList.add('ms-boom');cell.textContent='💥';}
+					else if(s===1){
+						cell.classList.add('ms-open');
+						if(MS.mines[idx]){cell.textContent='💣';}
+						else if(MS.nums[idx]>0){cell.textContent=MS.nums[idx];cell.style.color=NUM_CLR[MS.nums[idx]];}
+					} else {
+						cell.classList.add('ms-hidden');
+					}
+					cell.addEventListener('click',function(){msReveal(idx);});
+					cell.addEventListener('contextmenu',function(e){e.preventDefault();msFlag(idx);});
+					grid.appendChild(cell);
+				})(i);
+			}
+
+			function msLCD(id,val){
+				var el=document.getElementById(id);
+				if(el) el.textContent=String(Math.max(-99,Math.min(999,val))).replace('-','-').padStart(3,'0');
 			}
 		</script>
 	</body>
