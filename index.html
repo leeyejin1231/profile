@@ -1001,6 +1001,7 @@
 					document.removeEventListener('mouseup', msGlobalUp);
 				};
 				document.getElementById('ms-face').onclick = function() { msReset(); };
+				document.getElementById('ms-grid').addEventListener('contextmenu', function(e){ e.preventDefault(); });
 				el.querySelectorAll('.ms-diff').forEach(function(btn) {
 					btn.addEventListener('click', function() {
 						el.querySelectorAll('.ms-diff').forEach(function(b){ b.classList.remove('ms-diff-on'); });
